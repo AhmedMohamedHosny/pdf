@@ -3,44 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a1124" />
-  <meta name="description" content="AhmedPdf — Professional All-in-One File Management, PDF Processing, Office Conversion, OCR, Image Studio & Archive Platform." />
+  <meta name="theme-color" content="#0b1120" />
+  <meta name="description" content="AhmedPdf — Professional All-in-One File Management, PDF Processing, Office Conversion, Image Studio & Secure Archive Platform." />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-Title" content="AhmedPdf" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>AhmedPdf — All-in-One File Management & PDF Tools Platform</title>
 
-  <!-- الشعار الأساسي للموقع والأيقونة لسطح المكتب -->
-  <link rel="icon" type="image/png" href="logo.png" />
+  <!-- Desktop App Icon & Favicon (ah.png) -->
+  <link rel="icon" type="image/png" href="ah.png" />
   <link rel="apple-touch-icon" href="ah.png" />
   <link rel="manifest" href="manifest.json" />
 
-  <!-- الخطوط القياسية -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- ملف التنسيقات الرئيسي -->
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- مكتبات المعالجة الحقيقية (PDF, ZIP, Office, Excel, OCR) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" crossorigin="anonymous"></script>
+  <!-- Core Client-Side Processing Engines (PDF-Lib, PDF.js, JSZip, SheetJS, Mammoth, Tesseract OCR) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
 </head>
 <body>
-  <div class="app-layout">
-    <!-- ==================== القائمة الجانبية (SIDEBAR) ==================== -->
+  <div class="app-layout" id="app-layout">
+    <!-- ==================== SIDEBAR NAVIGATION ==================== -->
     <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
       <div class="sidebar-header">
-        <a href="#home" class="brand-logo" id="brand-home-link">
-          <div class="brand-logo-wrap">
-            <img src="logo.png" alt="AhmedPdf Logo" class="brand-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-            <div class="brand-fallback-icon" style="display:none;">AP</div>
+        <a href="#home" class="brand-logo" id="brand-home-link" aria-label="AhmedPdf Home">
+          <div class="logo-img-wrap">
+            <img src="logo.png" alt="AhmedPdf Logo" id="site-logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback-svg').style.display='grid';" />
+            <div class="logo-fallback" id="logo-fallback-svg" style="display:none;">AP</div>
           </div>
           <div class="brand-text">
             <span class="brand-title">Ahmed<span>Pdf</span></span>
@@ -50,717 +49,725 @@
         <button class="icon-btn mobile-close-btn" id="sidebar-close-btn" aria-label="Close navigation">✕</button>
       </div>
 
+      <!-- Desktop App Install Card (Uses ah.png) -->
+      <div class="desktop-install-banner" id="desktop-install-card">
+        <img src="ah.png" alt="AhmedPdf Desktop App" class="desktop-app-icon" onerror="this.src='logo.png'" />
+        <div class="install-copy">
+          <b>AhmedPdf Desktop</b>
+          <small>Works 100% Offline</small>
+        </div>
+        <button type="button" class="btn-install-app" id="sidebar-install-btn" title="Install AhmedPdf on Desktop">⬇ Install</button>
+      </div>
+
       <div class="sidebar-scroll">
         <div class="nav-group">
-          <span class="nav-group-label">WORKSPACE</span>
-          <button class="nav-link active" data-page="home">
-            <span class="nav-icon">⌂</span>
+          <p class="nav-group-label">OVERVIEW</p>
+          <button type="button" class="nav-link active" data-view="home">
+            <span class="nav-ico">⌂</span>
             <span>Home Dashboard</span>
           </button>
-          <button class="nav-link" data-page="all-tools">
-            <span class="nav-icon">⊞</span>
+          <button type="button" class="nav-link" data-view="all-tools">
+            <span class="nav-ico">⊞</span>
             <span>All Tools</span>
             <span class="nav-badge" id="total-tools-badge">28</span>
           </button>
-          <button class="nav-link" data-page="my-files">
-            <span class="nav-icon">📁</span>
+        </div>
+
+        <div class="nav-group">
+          <p class="nav-group-label">PROCESSING CENTERS</p>
+          <button type="button" class="nav-link" data-view="pdf-tools">
+            <span class="nav-ico pdf-clr">📄</span>
+            <span>PDF Tools</span>
+          </button>
+          <button type="button" class="nav-link" data-view="converter">
+            <span class="nav-ico conv-clr">⇄</span>
+            <span>File Converter</span>
+          </button>
+          <button type="button" class="nav-link" data-view="image-tools">
+            <span class="nav-ico img-clr">🖼️</span>
+            <span>Image Tools</span>
+          </button>
+          <button type="button" class="nav-link" data-view="compression">
+            <span class="nav-ico zip-clr">🗜️</span>
+            <span>Compression & ZIP</span>
+          </button>
+          <button type="button" class="nav-link" data-view="organizer">
+            <span class="nav-ico org-clr">📑</span>
+            <span>PDF Page Organizer</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <p class="nav-group-label">WORKSPACE & STORAGE</p>
+          <button type="button" class="nav-link" data-view="my-files">
+            <span class="nav-ico">📁</span>
             <span>My Files</span>
-            <span class="nav-badge" id="sidebar-files-count">0</span>
+            <span class="nav-badge" id="my-files-count-badge">0</span>
           </button>
-          <button class="nav-link" data-page="recent">
-            <span class="nav-icon">◷</span>
+          <button type="button" class="nav-link" data-view="recent">
+            <span class="nav-ico">◷</span>
             <span>Recent Operations</span>
+            <span class="nav-badge" id="recent-ops-badge">0</span>
           </button>
-          <button class="nav-link" data-page="favorites">
-            <span class="nav-icon">★</span>
+          <button type="button" class="nav-link" data-view="favorites">
+            <span class="nav-ico">★</span>
             <span>Favorites</span>
           </button>
         </div>
 
         <div class="nav-group">
-          <span class="nav-group-label">TOOL CENTERS</span>
-          <button class="nav-link" data-page="pdf-tools">
-            <span class="nav-icon pdf-accent">📄</span>
-            <span>PDF Tools</span>
-          </button>
-          <button class="nav-link" data-page="organizer">
-            <span class="nav-icon purple-accent">❖</span>
-            <span>PDF Organizer</span>
-          </button>
-          <button class="nav-link" data-page="converter">
-            <span class="nav-icon cyan-accent">⇄</span>
-            <span>File Converter</span>
-          </button>
-          <button class="nav-link" data-page="image-tools">
-            <span class="nav-icon green-accent">🖼</span>
-            <span>Image Tools</span>
-          </button>
-          <button class="nav-link" data-page="compression">
-            <span class="nav-icon orange-accent">🗜</span>
-            <span>Compression & ZIP</span>
-          </button>
-        </div>
-
-        <div class="nav-group">
-          <span class="nav-group-label">SYSTEM & LEGAL</span>
-          <button class="nav-link" data-page="settings">
-            <span class="nav-icon">⚙</span>
+          <p class="nav-group-label">SYSTEM & TRUST</p>
+          <button type="button" class="nav-link" data-view="settings">
+            <span class="nav-ico">⚙</span>
             <span>Settings</span>
           </button>
-          <button class="nav-link" data-page="help">
-            <span class="nav-icon">?</span>
-            <span>Help & FAQ</span>
+          <button type="button" class="nav-link" data-view="help">
+            <span class="nav-ico">?</span>
+            <span>Help, QA & FAQ</span>
           </button>
-          <button class="nav-link" data-page="privacy">
-            <span class="nav-icon">🛡</span>
+          <button type="button" class="nav-link" data-view="privacy">
+            <span class="nav-ico">🛡️</span>
             <span>Privacy & Security</span>
           </button>
-          <button class="nav-link" data-page="terms">
-            <span class="nav-icon">§</span>
+          <button type="button" class="nav-link" data-view="terms">
+            <span class="nav-ico">⚖️</span>
             <span>Terms & Plans</span>
           </button>
         </div>
       </div>
 
       <div class="sidebar-footer">
-        <!-- بطاقة تثبيت البرنامج على الديسكتوب بصورة ah.png -->
-        <div class="desktop-install-card" id="sidebar-install-card">
-          <img src="ah.png" alt="AhmedPdf Desktop App" class="install-app-icon" onerror="this.src='logo.png'; this.onerror=function(){this.style.display='none'};" />
-          <div class="install-copy">
-            <b>AhmedPdf Desktop</b>
-            <small>Offline-ready native app</small>
-          </div>
-          <button class="btn-install-mini" id="sidebar-install-btn" type="button" title="Install AhmedPdf on Desktop">⬇ Install</button>
-        </div>
-
-        <!-- مؤشر المساحة التخزينية المحلية IndexedDB -->
-        <div class="storage-widget">
-          <div class="storage-header">
-            <span>Local Workspace</span>
-            <b id="storage-usage-text">0 KB / 250 MB</b>
+        <div class="storage-meter-card">
+          <div class="storage-top">
+            <span>LOCAL WORKSPACE</span>
+            <b id="storage-used-label">0.0 MB / 250 MB</b>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill" id="storage-usage-bar" style="width: 1%;"></div>
+            <span id="storage-bar-fill" style="width: 2%"></span>
           </div>
-          <small class="storage-note">🔒 100% Private Local IndexedDB</small>
+          <small>IndexedDB Encrypted Browser Store</small>
         </div>
 
-        <!-- ملف المستخدم -->
-        <div class="user-profile-bar" id="open-auth-modal-btn" role="button" tabindex="0">
-          <div class="user-avatar" id="user-avatar-initials">AP</div>
+        <div class="user-profile-bar" id="user-profile-trigger" role="button" tabindex="0">
+          <img src="ah.png" alt="User Avatar" class="user-avatar-img" onerror="this.style.display='none'" />
           <div class="user-info">
-            <b id="user-display-name">Local Pro Workspace</b>
-            <small id="user-status-label">Offline-First · Verified</small>
+            <b id="sidebar-user-name">Local Workspace</b>
+            <small id="sidebar-user-status">● Client-Side Mode Active</small>
           </div>
           <span class="profile-gear">•••</span>
         </div>
       </div>
     </aside>
 
-    <!-- ==================== المنطقة الرئيسية (MAIN WORKSPACE) ==================== -->
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
     <div class="main-wrapper">
-      <!-- الشريط العلوي (TOPBAR) -->
+      <!-- TOPBAR -->
       <header class="topbar">
         <div class="topbar-left">
-          <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">☰</button>
+          <button type="button" class="icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">☰</button>
           <div class="breadcrumb">
-            <span class="breadcrumb-root">AhmedPdf</span>
-            <span class="breadcrumb-sep">/</span>
+            <span>AhmedPdf</span>
+            <span class="slash">/</span>
             <strong id="breadcrumb-current">Home Dashboard</strong>
           </div>
         </div>
 
         <div class="topbar-search">
-          <span class="search-icon">⌕</span>
-          <input
-            type="search"
-            id="global-tool-search"
-            placeholder="Search tools (e.g. Merge PDF, Word to PDF, Extract ZIP, OCR)..."
-            aria-label="Search tools and files"
-            autocomplete="off"
-          />
-          <kbd class="search-shortcut">Ctrl K</kbd>
+          <span class="search-ico">⌕</span>
+          <input type="search" id="global-tool-search" placeholder="Search tools (e.g., Merge PDF, Word to PDF, Extract ZIP, OCR)..." aria-label="Search tools" autocomplete="off" />
+          <kbd>Ctrl K</kbd>
           <div class="search-dropdown" id="search-dropdown" hidden></div>
         </div>
 
         <div class="topbar-actions">
-          <button class="btn btn-outline btn-sm" id="topbar-install-btn" type="button" title="Install Desktop App (ah.png)">
-            <img src="ah.png" alt="" class="btn-mini-icon" onerror="this.style.display='none'" />
-            <span>📲 Install App</span>
+          <span class="security-pill" title="Files are processed locally inside your browser sandbox whenever supported">
+            <span class="pulse-dot"></span> Local Sandbox
+          </span>
+          <button type="button" class="btn-secondary btn-sm" id="topbar-install-btn" title="Download & Install AhmedPdf Desktop App">
+            <img src="ah.png" alt="" style="width:16px;height:16px;border-radius:4px;" onerror="this.style.display='none'" />
+            <span>Install App</span>
           </button>
-          <button class="btn btn-outline btn-sm" id="run-qa-tests-btn" type="button" title="Run Automated Diagnostic & QA Suite">
-            <span>🧪 QA Verify</span>
+          <button type="button" class="btn-secondary btn-sm" id="open-batch-queue-btn" title="View Active Processing Queue">
+            <span>⚡ Queue</span>
+            <span class="queue-pill" id="topbar-queue-count">0</span>
           </button>
-          <button class="icon-btn" id="theme-toggle-btn" aria-label="Toggle Light/Dark Theme" title="Toggle Theme">☀️</button>
+          <button type="button" class="icon-btn" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme" title="Switch Theme">☀️</button>
+          <button type="button" class="btn-primary btn-sm" id="quick-upload-trigger-btn">
+            <span>＋ Upload Files</span>
+          </button>
         </div>
       </header>
 
-      <!-- محتوى الصفحات المتعددة -->
-      <main class="content-area" id="main-content">
+      <!-- GLOBAL HIDDEN FILE INPUTS -->
+      <input type="file" id="global-file-input" multiple hidden />
+      <input type="file" id="global-folder-input" webkitdirectory directory multiple hidden />
 
-        <!-- ==================== 1. HOME DASHBOARD ==================== -->
-        <section class="page-view active" id="page-home">
-          <div class="hero-banner">
-            <div class="hero-copy">
-              <div class="status-pill">
-                <span class="pulse-dot"></span>
-                <span>LOCAL-FIRST ENGINE · MAGIC-BYTE VERIFIED · ZERO SERVER LEAKS</span>
-              </div>
-              <h1>Every Document & PDF Tool You Need, <span>In One Secure Workspace.</span></h1>
-              <p>Convert, merge, split, organize, compress, OCR, and manage PDFs, Office files, images, and ZIP archives directly in your browser with real binary precision.</p>
-              <div class="hero-btns">
-                <button class="btn btn-primary" data-goto="all-tools">Explore All 28 Tools →</button>
-                <button class="btn btn-secondary" data-goto="pdf-tools">Open PDF Studio</button>
-                <button class="btn btn-secondary" data-goto="my-files">My Workspace Files</button>
-              </div>
+      <!-- ==================== VIEW 1: HOME DASHBOARD ==================== -->
+      <main class="view-container active-view" id="view-home">
+        <section class="hero-banner">
+          <div class="hero-copy">
+            <div class="eyebrow-badge">
+              <span class="pulse-dot"></span> ALL-IN-ONE DOCUMENT & PDF WORKSTATION
             </div>
-
-            <!-- منطقة السحب والإفلات السريعة في الرئيسية -->
-            <div class="quick-dropzone" id="dashboard-dropzone" tabindex="0" role="button" aria-label="Upload files to start processing">
-              <input type="file" id="dashboard-file-input" multiple hidden />
-              <div class="dropzone-icon-wrap">
-                <img src="logo.png" alt="AhmedPdf" class="dropzone-brand-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                <span style="display:none; font-size:32px;">📄</span>
-              </div>
-              <h3>Drop files here or click to browse</h3>
-              <p>Supports PDF, DOCX, XLSX, PPTX, CSV, TXT, JPG, PNG, WEBP, SVG & ZIP</p>
-              <div class="dropzone-badges">
-                <span>✓ Signature Verified</span>
-                <span>✓ Instant Tool Routing</span>
-                <span>✓ Auto-Saved to Workspace</span>
-              </div>
+            <h1>Every PDF, Office, Image & Archive Tool in One Trusted Workspace.</h1>
+            <p>Convert, merge, split, organize, compress, inspect, and protect your files directly in your browser with real cryptographic signature validation and zero-upload privacy for local tools.</p>
+            <div class="hero-cta-row">
+              <button type="button" class="btn-primary" data-goto="all-tools">Explore All 28 Tools →</button>
+              <button type="button" class="btn-secondary" data-goto="pdf-tools">Open PDF Studio</button>
+              <button type="button" class="btn-secondary" data-goto="my-files">My Workspace Files</button>
             </div>
           </div>
 
-          <!-- إحصائيات سريعة -->
-          <div class="stats-row">
-            <div class="stat-box">
-              <span class="stat-label">PROCESSED FILES</span>
-              <strong id="stat-processed-count">0</strong>
-              <small>Real verified operations</small>
+          <div class="hero-brand-showcase">
+            <div class="showcase-card">
+              <div class="showcase-top">
+                <img src="logo.png" alt="AhmedPdf" class="showcase-logo" onerror="this.src='ah.png'" />
+                <div>
+                  <b>AhmedPdf Engine v3.0</b>
+                  <small>PDF-Lib · PDF.js · SheetJS · Mammoth · JSZip</small>
+                </div>
+                <span class="status-tag">READY</span>
+              </div>
+              <div class="showcase-metrics">
+                <div class="metric-item">
+                  <span class="metric-val" id="stat-processed-count">0</span>
+                  <span class="metric-lbl">Files Processed</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-val" id="stat-workspace-count">0</span>
+                  <span class="metric-lbl">Saved in Workspace</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-val" id="stat-fav-count">0</span>
+                  <span class="metric-lbl">Pinned Favorites</span>
+                </div>
+              </div>
             </div>
-            <div class="stat-box">
-              <span class="stat-label">WORKSPACE FILES</span>
-              <strong id="stat-workspace-count">0</strong>
-              <small>Stored in local IndexedDB</small>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">SPACE SAVED</span>
-              <strong id="stat-space-saved">0 KB</strong>
-              <small>Via PDF, Image & ZIP compression</small>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">SECURITY ENGINE</span>
-              <strong class="text-green">Active ✓</strong>
-              <small>Magic-byte & Zip-Slip Guard</small>
+          </div>
+        </section>
+
+        <!-- UNIVERSAL DRAG & DROP UPLOAD ZONE -->
+        <section class="upload-dropzone-section">
+          <div class="dropzone-card" id="universal-dropzone" tabindex="0" role="button" aria-label="Upload files by clicking or dragging and dropping">
+            <div class="dropzone-icon">📂</div>
+            <h3>Drag & drop files here, or click to browse</h3>
+            <p>Supports PDF, DOCX, XLSX, CSV, TXT, JPG, PNG, WEBP, SVG, and ZIP · Magic-byte signature verified</p>
+            <div class="dropzone-actions">
+              <button type="button" class="btn-primary" id="dropzone-select-files-btn">Select Files</button>
+              <button type="button" class="btn-secondary" id="dropzone-select-folder-btn">Select Folder (ZIP)</button>
+              <button type="button" class="btn-secondary" id="dropzone-clear-staging-btn" hidden>Clear Selected</button>
             </div>
           </div>
 
-          <!-- الأدوات الأكثر استخداماً -->
-          <div class="section-header">
+          <!-- STAGED FILES BAR (Appears immediately when user selects files) -->
+          <div class="staged-files-panel" id="staged-files-panel" hidden>
+            <div class="panel-header">
+              <div>
+                <h4>Selected Session Files (<span id="staged-count">0</span>)</h4>
+                <small>Validated via file magic bytes · Choose an action or save to workspace</small>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn-secondary btn-sm" id="save-staged-to-workspace-btn">💾 Save All to My Files</button>
+                <button type="button" class="btn-secondary btn-sm" id="zip-staged-files-btn">🗜️ Pack into ZIP</button>
+                <button type="button" class="btn-danger btn-sm" id="clear-staged-btn">✕ Clear All</button>
+              </div>
+            </div>
+            <div class="staged-file-list" id="staged-file-list"></div>
+          </div>
+        </section>
+
+        <!-- FREQUENTLY USED TOOLS -->
+        <section class="dashboard-section">
+          <div class="section-head">
             <div>
-              <span class="section-eyebrow">INSTANT ACCESS</span>
+              <span class="section-kicker">INSTANT LAUNCH</span>
               <h2>Frequently Used Tools</h2>
             </div>
-            <button class="btn-link" data-goto="all-tools">View all tools →</button>
+            <button type="button" class="link-btn" data-goto="all-tools">View all tools →</button>
           </div>
-          <div class="tools-grid" id="home-popular-tools"></div>
+          <div class="tools-grid" id="home-featured-tools-grid"></div>
+        </section>
 
-          <!-- اختصارات التحويل والملفات الأخيرة -->
-          <div class="dashboard-split-grid">
-            <div class="card-panel">
-              <div class="panel-header">
+        <!-- SPLIT DASHBOARD: RECENT OPERATIONS & RECENT WORKSPACE FILES -->
+        <div class="dashboard-two-col">
+          <section class="panel-card">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">ACTIVITY LOG</span>
+                <h3>Recent Operations</h3>
+              </div>
+              <button type="button" class="link-btn" data-goto="recent">Open Queue →</button>
+            </div>
+            <div id="home-recent-ops-list" class="compact-list"></div>
+          </section>
+
+          <section class="panel-card">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">LOCAL INDEXEDDB</span>
                 <h3>Recent Workspace Files</h3>
-                <button class="btn-link" data-goto="my-files">Open File Manager →</button>
               </div>
-              <div id="home-recent-files-list" class="compact-list"></div>
+              <button type="button" class="link-btn" data-goto="my-files">Manage Files →</button>
             </div>
+            <div id="home-recent-files-list" class="compact-list"></div>
+          </section>
+        </div>
+      </main>
 
-            <div class="card-panel">
-              <div class="panel-header">
-                <h3>Recent Operations Log</h3>
-                <button class="btn-link" data-goto="recent">Full History →</button>
+      <!-- ==================== VIEW 2: ALL TOOLS DIRECTORY ==================== -->
+      <main class="view-container" id="view-all-tools">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">COMPLETE DIRECTORY</span>
+            <h1>All Document, PDF, Image & Archive Tools</h1>
+            <p>Filter by category or search by alias. Every listed tool executes real file processing.</p>
+          </div>
+          <div class="view-header-actions">
+            <input type="search" id="directory-search-input" class="input-field" placeholder="Filter tools (e.g. split, watermark, xlsx, ocr)..." />
+          </div>
+        </div>
+
+        <div class="category-pills" id="tool-category-pills">
+          <button type="button" class="cat-pill active" data-cat="all">All Categories</button>
+          <button type="button" class="cat-pill" data-cat="PDF">📄 PDF Tools</button>
+          <button type="button" class="cat-pill" data-cat="Word">📝 Word & Text</button>
+          <button type="button" class="cat-pill" data-cat="Excel">📊 Excel & CSV</button>
+          <button type="button" class="cat-pill" data-cat="Images">🖼️ Image Studio</button>
+          <button type="button" class="cat-pill" data-cat="Compression">🗜️ Compression & ZIP</button>
+          <button type="button" class="cat-pill" data-cat="Security">🔒 Security & Metadata</button>
+          <button type="button" class="cat-pill" data-cat="OCR">🔍 OCR Vision</button>
+        </div>
+
+        <div class="tools-grid" id="all-tools-grid"></div>
+      </main>
+
+      <!-- ==================== VIEW 3: PDF TOOLS CENTER ==================== -->
+      <main class="view-container" id="view-pdf-tools">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">PDF ENGINE CENTER</span>
+            <h1>PDF Processing & Manipulation Suite</h1>
+            <p>Powered by PDF-Lib & PDF.js. Merge, split, compress, watermark, number pages, convert to images/text, and edit metadata locally.</p>
+          </div>
+        </div>
+        <div class="tools-grid" id="pdf-center-tools-grid"></div>
+      </main>
+
+      <!-- ==================== VIEW 4: CROSS-FORMAT FILE CONVERTER ==================== -->
+      <main class="view-container" id="view-converter">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">UNIVERSAL CONVERTER</span>
+            <h1>Cross-Format File Converter</h1>
+            <p>Select any supported file, view honest technical limitations, convert with real engines, and download your output.</p>
+          </div>
+        </div>
+
+        <div class="converter-stepper-card">
+          <div class="step-indicator-row">
+            <div class="step-badge active"><span>1</span> Select Input File</div>
+            <div class="step-badge"><span>2</span> Choose Output Format</div>
+            <div class="step-badge"><span>3</span> Review Limitations</div>
+            <div class="step-badge"><span>4</span> Convert & Download</div>
+          </div>
+
+          <div class="converter-body">
+            <div class="converter-col">
+              <label class="field-label">1. Source File</label>
+              <div class="mini-dropzone" id="converter-dropzone">
+                <input type="file" id="converter-file-input" hidden />
+                <p id="converter-file-label">Click or drop a file here (PDF, DOCX, XLSX, CSV, TXT, JPG, PNG, WEBP)</p>
+                <button type="button" class="btn-secondary btn-sm" id="converter-browse-btn">Browse Device</button>
               </div>
-              <div id="home-recent-ops-list" class="compact-list"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================== 2. ALL TOOLS DIRECTORY ==================== -->
-        <section class="page-view" id="page-all-tools">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">COMPLETE TOOLKIT</span>
-              <h1>All Document, PDF, Image & Archive Tools</h1>
-              <p>Select any tool below to open its interactive processing studio. Every tool runs real verification and produces genuine files.</p>
-            </div>
-            <div class="filter-bar">
-              <input type="search" id="directory-search-input" class="input-field" placeholder="Filter tools by keyword..." />
-            </div>
-          </div>
-
-          <div class="category-pills" id="tool-category-pills">
-            <button class="cat-pill active" data-cat="all">All Tools</button>
-            <button class="cat-pill" data-cat="pdf">PDF Tools</button>
-            <button class="cat-pill" data-cat="word">Word</button>
-            <button class="cat-pill" data-cat="excel">Excel & CSV</button>
-            <button class="cat-pill" data-cat="ppt">PowerPoint</button>
-            <button class="cat-pill" data-cat="image">Images</button>
-            <button class="cat-pill" data-cat="archive">ZIP & Compression</button>
-            <button class="cat-pill" data-cat="security">Security & Metadata</button>
-            <button class="cat-pill" data-cat="ocr">OCR Vision</button>
-          </div>
-
-          <div class="tools-grid" id="all-tools-grid"></div>
-        </section>
-
-        <!-- ==================== 3. PDF TOOLS CENTER ==================== -->
-        <section class="page-view" id="page-pdf-tools">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">PDF ENGINE</span>
-              <h1>PDF Tool Center</h1>
-              <p>Merge, split, compress, watermark, number pages, annotate, convert, and inspect PDFs with client-side accuracy.</p>
-            </div>
-          </div>
-          <div class="tools-grid" id="pdf-center-grid"></div>
-        </section>
-
-        <!-- ==================== 4. UNIVERSAL FILE CONVERTER ==================== -->
-        <section class="page-view" id="page-converter">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">CROSS-FORMAT ENGINE</span>
-              <h1>Smart Universal File Converter</h1>
-              <p>Upload any supported file. AhmedPdf inspects its binary header and presents all genuinely supported target formats.</p>
-            </div>
-          </div>
-
-          <div class="converter-studio card-panel">
-            <div class="converter-steps">
-              <div class="step-item active"><span>1</span> Select Input File(s)</div>
-              <div class="step-item"><span>2</span> Choose Output Format</div>
-              <div class="step-item"><span>3</span> Review Limitations & Convert</div>
+              <div id="converter-source-meta" class="file-meta-box" hidden></div>
             </div>
 
-            <div class="upload-zone" id="converter-dropzone">
-              <input type="file" id="converter-file-input" multiple hidden />
-              <div class="upload-icon">⇄</div>
-              <h3>Select or Drop Files to Convert</h3>
-              <p>Supported inputs: PDF, DOCX, XLSX, CSV, PPTX, TXT, HTML, JPG, PNG, WEBP</p>
-              <button class="btn btn-primary" type="button" onclick="document.getElementById('converter-file-input').click()">Choose Files</button>
-            </div>
+            <div class="converter-col">
+              <label class="field-label" for="converter-target-format">2. Supported Target Format</label>
+              <select id="converter-target-format" class="select-field" disabled>
+                <option value="">Select a source file first...</option>
+              </select>
 
-            <div id="converter-config-area" class="converter-config-area" hidden>
-              <div class="selected-files-header">
-                <h4 id="converter-files-summary">Selected Files (0)</h4>
-                <button class="btn btn-outline btn-sm" id="converter-clear-btn" type="button">Clear All</button>
-              </div>
-              <div id="converter-file-list" class="uploaded-file-list"></div>
-
-              <div class="converter-controls-row">
-                <div class="form-group">
-                  <label for="converter-target-format">Target Output Format:</label>
-                  <select id="converter-target-format" class="select-field"></select>
-                </div>
-                <div class="form-group" id="converter-extra-options"></div>
+              <div class="limitation-notice" id="converter-limitation-box">
+                <b>ℹ️ Transparency & Technical Note:</b>
+                <p id="converter-limitation-text">Select a file and target format to see exact conversion behavior and layout preservation details.</p>
               </div>
 
-              <div class="limitation-notice" id="converter-limitation-note"></div>
-
-              <div class="action-bar">
-                <button class="btn btn-primary btn-lg" id="start-universal-convert-btn" type="button">⚡ Start Real Conversion</button>
-              </div>
-            </div>
-
-            <div id="converter-results-area" class="results-box" hidden></div>
-          </div>
-        </section>
-
-        <!-- ==================== 5. IMAGE TOOLS STUDIO ==================== -->
-        <section class="page-view" id="page-image-tools">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">IMAGE PROCESSING</span>
-              <h1>Image Conversion, Compression & Resizing Studio</h1>
-              <p>Convert between JPG, PNG, WEBP, and PDF. Compress, resize, rotate, crop, and inspect image dimensions.</p>
-            </div>
-          </div>
-          <div class="tools-grid" id="image-center-grid"></div>
-        </section>
-
-        <!-- ==================== 6. COMPRESSION & ARCHIVE CENTER ==================== -->
-        <section class="page-view" id="page-compression">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">ARCHIVE & OPTIMIZATION</span>
-              <h1>Compression & ZIP Archive Center</h1>
-              <p>Package multiple files or folders into ZIP archives, safely inspect and extract ZIP contents with Zip-Slip protection, or optimize PDFs and images.</p>
-            </div>
-          </div>
-          <div class="tools-grid" id="compression-center-grid"></div>
-        </section>
-
-        <!-- ==================== 7. INTERACTIVE PDF ORGANIZER ==================== -->
-        <section class="page-view" id="page-organizer">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">PAGE-LEVEL CONTROL</span>
-              <h1>Interactive PDF Page Organizer</h1>
-              <p>Preview every page thumbnail, rotate pages, reorder left/right, duplicate, delete, or extract selected pages into a new PDF.</p>
-            </div>
-            <div class="header-actions" id="organizer-top-actions" hidden>
-              <button class="btn btn-outline btn-sm" id="org-rotate-all-btn" type="button">↻ Rotate All 90°</button>
-              <button class="btn btn-outline btn-sm" id="org-reset-btn" type="button">↺ Reset</button>
-              <button class="btn btn-primary btn-sm" id="org-save-pdf-btn" type="button">💾 Export Organized PDF</button>
-            </div>
-          </div>
-
-          <div class="card-panel">
-            <div class="upload-zone" id="organizer-dropzone">
-              <input type="file" id="organizer-file-input" accept=".pdf,application/pdf" hidden />
-              <div class="upload-icon">❖</div>
-              <h3>Select a PDF Document to Organize Pages</h3>
-              <p>Renders real interactive page thumbnails so you can reorder, rotate, duplicate, or delete pages visually.</p>
-              <button class="btn btn-primary" type="button" onclick="document.getElementById('organizer-file-input').click()">Select PDF File</button>
-            </div>
-
-            <div id="organizer-workspace" hidden>
-              <div class="organizer-toolbar">
-                <span id="organizer-doc-info">Document.pdf · 0 pages</span>
-                <div class="organizer-toolbar-btns">
-                  <button class="btn btn-outline btn-sm" id="org-extract-selected-btn" type="button">Extract Selected Pages</button>
-                  <button class="btn btn-danger btn-sm" id="org-delete-selected-btn" type="button">Delete Selected</button>
-                </div>
-              </div>
-              <div class="page-thumbnails-grid" id="organizer-pages-grid"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================== 8. MY FILES (FILE MANAGER) ==================== -->
-        <section class="page-view" id="page-my-files">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">APPLICATION WORKSPACE</span>
-              <h1>My Files & Folders Manager</h1>
-              <p>Manage files stored in your local IndexedDB workspace. Create folders, preview documents, rename, mark favorites, or bundle into a ZIP.</p>
-            </div>
-            <div class="header-actions">
-              <input type="file" id="fm-upload-input" multiple hidden />
-              <input type="file" id="fm-folder-upload-input" webkitdirectory directory multiple hidden />
-              <button class="btn btn-primary btn-sm" type="button" onclick="document.getElementById('fm-upload-input').click()">+ Upload Files</button>
-              <button class="btn btn-outline btn-sm" type="button" onclick="document.getElementById('fm-folder-upload-input').click()">📂 Import Folder</button>
-              <button class="btn btn-outline btn-sm" id="fm-new-folder-btn" type="button">➕ New Folder</button>
-            </div>
-          </div>
-
-          <div class="fm-Disclosure-banner">
-            <span>🔒 <b>Workspace Storage Distinction:</b> Files shown here are stored inside your browser's sandboxed IndexedDB workspace. Websites cannot arbitrarily access or modify files on your computer without your explicit file selection.</span>
-          </div>
-
-          <div class="card-panel fm-container">
-            <div class="fm-toolbar">
-              <div class="fm-folders-bar" id="fm-folders-bar"></div>
-              <div class="fm-controls">
-                <input type="search" id="fm-search-input" class="input-field input-sm" placeholder="Search files by name..." />
-                <select id="fm-type-filter" class="select-field select-sm">
-                  <option value="all">All Types</option>
-                  <option value="pdf">PDF Documents</option>
-                  <option value="office">Word / Excel / PPT</option>
-                  <option value="image">Images</option>
-                  <option value="archive">ZIP Archives</option>
-                  <option value="trash">🗑 Trash Bin</option>
-                </select>
-                <select id="fm-sort-select" class="select-field select-sm">
-                  <option value="date-desc">Newest First</option>
-                  <option value="name-asc">Name (A-Z)</option>
-                  <option value="size-desc">Largest First</option>
-                </select>
-                <div class="view-toggle-group">
-                  <button class="icon-btn active" id="fm-view-grid" title="Grid View">⊞</button>
-                  <button class="icon-btn" id="fm-view-list" title="List View">☰</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="fm-batch-bar" id="fm-batch-bar" hidden>
-              <span id="fm-selected-count">0 selected</span>
-              <div class="fm-batch-actions">
-                <button class="btn btn-outline btn-sm" id="fm-batch-zip-btn" type="button">🗜 Download as ZIP</button>
-                <button class="btn btn-danger btn-sm" id="fm-batch-delete-btn" type="button">🗑 Delete Selected</button>
-              </div>
-            </div>
-
-            <div id="fm-files-Viewport" class="fm-grid-view"></div>
-          </div>
-        </section>
-
-        <!-- ==================== 9. RECENT OPERATIONS & BATCH QUEUE ==================== -->
-        <section class="page-view" id="page-recent">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">ACTIVITY & AUDIT LOG</span>
-              <h1>Recent Operations & Job History</h1>
-              <p>Track all completed and failed file processing jobs, compare input/output sizes, and re-download generated files.</p>
-            </div>
-            <button class="btn btn-outline btn-sm" id="clear-recent-ops-btn" type="button">Clear History</button>
-          </div>
-          <div class="card-panel">
-            <div id="recent-operations-table-wrap"></div>
-          </div>
-        </section>
-
-        <!-- ==================== 10. FAVORITES ==================== -->
-        <section class="page-view" id="page-favorites">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">PINNED ITEMS</span>
-              <h1>Favorite Tools & Starred Files</h1>
-              <p>Quick access to your starred tools and important workspace documents.</p>
-            </div>
-          </div>
-          <h3>Starred Tools</h3>
-          <div class="tools-grid" id="fav-tools-grid"></div>
-          <h3 style="margin-top: 28px;">Starred Workspace Files</h3>
-          <div class="card-panel" id="fav-files-list"></div>
-        </section>
-
-        <!-- ==================== 11. SETTINGS ==================== -->
-        <section class="page-view" id="page-settings">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">PREFERENCES & LIMITS</span>
-              <h1>Platform Settings</h1>
-              <p>Customize visual theme, processing defaults, security thresholds, and local storage management.</p>
-            </div>
-          </div>
-
-          <div class="settings-grid">
-            <div class="card-panel">
-              <h3>Appearance & Interface</h3>
-              <div class="setting-row">
-                <div>
-                  <b>Color Theme</b>
-                  <small>Switch between Deep Navy Dark and Clean Light mode</small>
-                </div>
-                <select id="setting-theme-select" class="select-field select-sm">
-                  <option value="dark">Deep Navy Dark</option>
-                  <option value="light">Clean Light Surface</option>
-                </select>
-              </div>
-              <div class="setting-row">
-                <div>
-                  <b>Auto-Save Outputs to Workspace</b>
-                  <small>Automatically save processed files into "My Files"</small>
-                </div>
-                <input type="checkbox" id="setting-autosave-check" checked />
-              </div>
-            </div>
-
-            <div class="card-panel">
-              <h3>Processing & Security Limits</h3>
-              <div class="setting-row">
-                <div>
-                  <b>Max Single File Size Limit (MB)</b>
-                  <small>Protects browser memory from freeze during local parsing</small>
-                </div>
-                <input type="number" id="setting-max-mb" class="input-field input-sm" value="150" min="10" max="500" style="width:90px;" />
-              </div>
-              <div class="setting-row">
-                <div>
-                  <b>Default Image Export Quality</b>
-                  <small>Used for JPG/WEBP compression and PDF page rendering</small>
-                </div>
-                <select id="setting-img-quality" class="select-field select-sm">
-                  <option value="0.92">High (92%)</option>
-                  <option value="0.80" selected>Balanced (80%)</option>
-                  <option value="0.60">Compact (60%)</option>
-                </select>
-              </div>
-              <div class="setting-row">
-                <div>
-                  <b>Reset All Workspace Data</b>
-                  <small>Deletes all IndexedDB files, folders, and history</small>
-                </div>
-                <button class="btn btn-danger btn-sm" id="setting-wipe-all-btn" type="button">Wipe Storage</button>
+              <div class="converter-actions">
+                <button type="button" class="btn-primary" id="converter-run-btn" disabled>⚡ Start Conversion</button>
               </div>
             </div>
           </div>
-        </section>
 
-        <!-- ==================== 12. HELP & FAQ ==================== -->
-        <section class="page-view" id="page-help">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">DOCUMENTATION & TRANSPARENCY</span>
-              <h1>Help, Supported Formats & Technical Limitations</h1>
-              <p>Clear, honest documentation of how AhmedPdf processes files, supported formats, and technical constraints.</p>
-            </div>
+          <div class="converter-output-area" id="converter-output-area" hidden></div>
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 5: IMAGE TOOLS STUDIO ==================== -->
+      <main class="view-container" id="view-image-tools">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">IMAGE PROCESSING STUDIO</span>
+            <h1>Convert, Compress, Resize, Rotate, Crop & Images to PDF</h1>
+            <p>High-precision HTML5 Canvas image pipeline with transparency warnings and EXIF/dimension inspection.</p>
+          </div>
+        </div>
+        <div class="tools-grid" id="image-center-tools-grid"></div>
+      </main>
+
+      <!-- ==================== VIEW 6: COMPRESSION & ARCHIVES ==================== -->
+      <main class="view-container" id="view-compression">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">ARCHIVE & COMPRESSION CENTER</span>
+            <h1>ZIP Archive Builder, Safe Extractor & PDF Compressor</h1>
+            <p>Includes Zip-Slip path traversal protection, entry count limits, and compression ratio security checks.</p>
+          </div>
+        </div>
+        <div class="tools-grid" id="compression-center-tools-grid"></div>
+      </main>
+
+      <!-- ==================== VIEW 7: PDF PAGE ORGANIZER ==================== -->
+      <main class="view-container" id="view-organizer">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">VISUAL PAGE STUDIO</span>
+            <h1>Interactive PDF Page Organizer</h1>
+            <p>Inspect real page thumbnails, reorder pages, rotate individual pages, duplicate, delete, or extract selected pages into a new PDF.</p>
+          </div>
+          <div class="view-header-actions">
+            <input type="file" id="organizer-pdf-input" accept=".pdf,application/pdf" hidden />
+            <button type="button" class="btn-secondary" id="organizer-load-btn">📂 Load PDF File</button>
+            <button type="button" class="btn-primary" id="organizer-export-btn" disabled>💾 Export Organized PDF</button>
+          </div>
+        </div>
+
+        <div class="organizer-toolbar" id="organizer-toolbar" hidden>
+          <span id="organizer-file-info">No PDF loaded</span>
+          <div class="organizer-bulk-btns">
+            <button type="button" class="btn-secondary btn-sm" id="org-rotate-all-btn">↻ Rotate All 90°</button>
+            <button type="button" class="btn-secondary btn-sm" id="org-reverse-order-btn">⇅ Reverse Page Order</button>
+            <button type="button" class="btn-secondary btn-sm" id="org-extract-selected-btn">📤 Extract Checked Pages</button>
+          </div>
+        </div>
+
+        <div class="organizer-grid" id="organizer-pages-grid">
+          <div class="empty-state-box">
+            <div class="empty-ico">📑</div>
+            <h3>No PDF Loaded in Organizer</h3>
+            <p>Select any multi-page PDF document to preview thumbnails, reorder, rotate, duplicate, or remove pages.</p>
+            <button type="button" class="btn-primary" id="organizer-empty-load-btn">Select PDF Document</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 8: MY FILES (WORKSPACE FILE MANAGER) ==================== -->
+      <main class="view-container" id="view-my-files">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">APPLICATION WORKSPACE</span>
+            <h1>My Files & Folders Manager</h1>
+            <p>Manage files stored in your local IndexedDB workspace, temporary session uploads, or local device folders via the File System Access API.</p>
+          </div>
+          <div class="view-header-actions">
+            <button type="button" class="btn-secondary btn-sm" id="fm-open-local-dir-btn" title="Mount a real folder from your computer with explicit permission">🖴 Mount Local Folder</button>
+            <button type="button" class="btn-secondary btn-sm" id="fm-new-folder-btn">➕ New Folder</button>
+            <button type="button" class="btn-primary btn-sm" id="fm-upload-btn">＋ Add Files</button>
+          </div>
+        </div>
+
+        <!-- Storage Source Tabs (Clear Distinction per Section 10) -->
+        <div class="storage-scope-tabs">
+          <button type="button" class="scope-tab active" data-scope="workspace">🗄️ Local Workspace (IndexedDB)</button>
+          <button type="button" class="scope-tab" data-scope="session">⚡ Temporary Device Selection</button>
+          <button type="button" class="scope-tab" data-scope="trash">🗑️ Trash / Recoverable</button>
+        </div>
+
+        <!-- File Manager Controls Bar -->
+        <div class="fm-toolbar">
+          <div class="fm-filters">
+            <input type="search" id="fm-search-input" class="input-field" placeholder="Search files by name..." />
+            <select id="fm-type-filter" class="select-field">
+              <option value="all">All File Types</option>
+              <option value="pdf">PDF Documents</option>
+              <option value="doc">Word / Text</option>
+              <option value="sheet">Excel / CSV</option>
+              <option value="image">Images</option>
+              <option value="archive">ZIP Archives</option>
+            </select>
+            <select id="fm-folder-filter" class="select-field">
+              <option value="all">📁 All Folders</option>
+            </select>
+            <select id="fm-sort-select" class="select-field">
+              <option value="date-desc">Newest First</option>
+              <option value="date-asc">Oldest First</option>
+              <option value="name-asc">Name (A → Z)</option>
+              <option value="size-desc">Size (Largest)</option>
+              <option value="size-asc">Size (Smallest)</option>
+            </select>
           </div>
 
-          <div class="settings-grid">
-            <div class="card-panel">
-              <h3>Supported Format Matrix</h3>
-              <ul class="doc-list">
-                <li><b>PDF Tools:</b> Merge, Split, Extract, Rotate, Reorder, Delete Pages, Watermark, Page Numbers, Header/Footer, Signature Image Overlay, Metadata Edit, PDF to JPG/PNG/WEBP, PDF to TXT, PDF to DOCX.</li>
-                <li><b>Word (.docx):</b> DOCX to PDF, DOCX to HTML, DOCX to TXT, TXT to DOCX (real OpenXML package), Live Document Preview.</li>
-                <li><b>Excel & Spreadsheets (.xlsx, .xls, .csv):</b> XLSX to CSV, CSV to XLSX, XLSX to PDF, XLSX to HTML/JSON with multi-sheet selection.</li>
-                <li><b>PowerPoint (.pptx):</b> Slide text & structure extraction (`ppt/slides/slide*.xml`) to PDF and TXT preview.</li>
-                <li><b>Images (JPG, PNG, WEBP, GIF, BMP, SVG):</b> Cross-conversion, quality compression, exact pixel resize, rotation, aspect-ratio crop, and batch Images to PDF.</li>
-                <li><b>Archives (.zip):</b> Create ZIP from files/folders, inspect & extract ZIP with path-traversal and zip-bomb guards.</li>
-              </ul>
-            </div>
+          <div class="fm-view-toggles">
+            <button type="button" class="btn-secondary btn-sm" id="fm-zip-selected-btn">🗜️ ZIP Selected</button>
+            <button type="button" class="icon-btn active" id="fm-grid-view-btn" title="Grid View">⊞</button>
+            <button type="button" class="icon-btn" id="fm-list-view-btn" title="List View">☰</button>
+          </div>
+        </div>
 
-            <div class="card-panel">
-              <h3>Known Technical Limitations (Transparency)</h3>
-              <ul class="doc-list">
-                <li><b>PDF to DOCX Layout:</b> Extracts text paragraphs into a valid `.docx` file; complex multi-column floating tables or vector graphics may not preserve exact visual positioning.</li>
-                <li><b>Scanned PDFs & OCR:</b> Image-only scanned PDFs do not contain embedded text streams. Use the built-in <b>OCR Vision Tool</b> (Tesseract.js) to extract text from scanned pages.</li>
-                <li><b>Office to PDF Formatting:</b> In-browser DOCX/XLSX/PPTX to PDF renders structured document content and tables cleanly, while full native Microsoft fonts/macros require a headless LibreOffice backend worker.</li>
-                <li><b>PDF Encryption:</b> Password verification and decrypting user-authorized PDFs are supported; removing unknown passwords without authorization is never performed.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        <div id="fm-files-container" class="fm-grid-view"></div>
+      </main>
 
-        <!-- ==================== 13. PRIVACY & SECURITY ==================== -->
-        <section class="page-view" id="page-privacy">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">SECURITY ARCHITECTURE</span>
-              <h1>Privacy Policy & Security Controls</h1>
-              <p>How AhmedPdf protects your documents and enforces strict validation.</p>
-            </div>
+      <!-- ==================== VIEW 9: RECENT OPERATIONS & BATCH QUEUE ==================== -->
+      <main class="view-container" id="view-recent">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">JOB QUEUE & HISTORY</span>
+            <h1>Recent Operations & Batch Processing Queue</h1>
+            <p>Track active conversions, inspect processing logs, download completed outputs, or retry failed items.</p>
           </div>
-          <div class="card-panel">
-            <h3>1. Local-First Execution</h3>
-            <p>All core PDF manipulations, image conversions, Office document parsing, and ZIP operations execute locally inside your browser's memory and sandboxed IndexedDB. Your sensitive documents are never silently uploaded to third-party servers.</p>
-            <h3>2. Magic-Byte File Signature Verification</h3>
-            <p>AhmedPdf never trusts file extensions alone. Before processing, the engine inspects binary magic headers (<code>%PDF-</code>, <code>PK\x03\x04</code>, <code>\xFF\xD8\xFF</code>, <code>\x89PNG</code>, <code>RIFF..WEBP</code>) to reject spoofed or corrupted files.</p>
-            <h3>3. Archive Extraction Safety (Zip-Slip & Bomb Guard)</h3>
-            <p>When browsing or extracting ZIP archives, AhmedPdf sanitizes all entry paths to block <code>../</code> path traversal, restricts maximum entry counts, and checks uncompressed size ratios before allocating memory.</p>
+          <div class="view-header-actions">
+            <button type="button" class="btn-secondary btn-sm" id="clear-completed-jobs-btn">Clear CompletedHistory</button>
           </div>
-        </section>
+        </div>
+        <div id="operations-queue-list" class="jobs-list"></div>
+      </main>
 
-        <!-- ==================== 14. TERMS & PLANS ==================== -->
-        <section class="page-view" id="page-terms">
-          <div class="page-header">
-            <div>
-              <span class="section-eyebrow">TERMS & ARCHITECTURE ROADMAP</span>
-              <h1>Terms of Service & Platform Tiers</h1>
-              <p>Honest capabilities without fake paywalls or simulated subscriptions.</p>
-            </div>
+      <!-- ==================== VIEW 10: FAVORITES ==================== -->
+      <main class="view-container" id="view-favorites">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">PINNED ITEMS</span>
+            <h1>Favorite Tools & Starred Workspace Files</h1>
+            <p>Quickly access the tools and documents you use every day.</p>
           </div>
-          <div class="settings-grid">
-            <div class="card-panel">
-              <span class="tag-badge">ACTIVE TIER</span>
-              <h3>Free Core Edition (Current)</h3>
-              <ul class="doc-list">
-                <li>✓ Unlimited local PDF Merge, Split, Organize, Watermark, and Page Numbering.</li>
-                <li>✓ Unlimited Image conversion, compression, resizing, and Images-to-PDF.</li>
-                <li>✓ Full DOCX, XLSX, CSV, PPTX, TXT, and ZIP processing in browser.</li>
-                <li>✓ Local IndexedDB File Manager with folders and batch ZIP export.</li>
-              </ul>
-            </div>
-            <div class="card-panel">
-              <span class="tag-badge purple">ARCHITECTURAL ROADMAP</span>
-              <h3>Enterprise Cloud Worker Tier (Optional Backend)</h3>
-              <ul class="doc-list">
-                <li>• Headless LibreOffice worker for pixel-exact complex Office macro rendering.</li>
-                <li>• Encrypted multi-device cloud storage sync (Firebase / Supabase RLS).</li>
-                <li>• High-volume server queue for 1GB+ archival batch jobs.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        </div>
+        <h3 class="sub-heading">★ Favorite Tools</h3>
+        <div class="tools-grid" id="favorite-tools-grid"></div>
+        <h3 class="sub-heading" style="margin-top:28px;">★ Starred Workspace Files</h3>
+        <div id="favorite-files-grid" class="fm-grid-view"></div>
+      </main>
 
+      <!-- ==================== VIEW 11: SETTINGS ==================== -->
+      <main class="view-container" id="view-settings">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">PREFERENCES & ARCHITECTURE</span>
+            <h1>Platform Settings & Environment Configuration</h1>
+            <p>Configure appearance, processing limits, local storage cleanup, and optional backend/cloud endpoints.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <div class="panel-card">
+            <h3>🎨 Interface & Processing Defaults</h3>
+            <div class="setting-row">
+              <div>
+                <b>Color Theme</b>
+                <small>Switch between Deep Navy Dark and Clean Light mode</small>
+              </div>
+              <select id="setting-theme-select" class="select-field" style="width:160px;">
+                <option value="dark">Deep Navy Dark</option>
+                <option value="light">Clean Daylight</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div>
+                <b>Default Image Compression Quality</b>
+                <small>Used when exporting JPG/WEBP or compressing PDF images</small>
+              </div>
+              <input type="number" id="setting-img-quality" class="input-field" min="10" max="100" value="82" style="width:100px;" />
+            </div>
+            <div class="setting-row">
+              <div>
+                <b>Max Single File Size Limit (MB)</b>
+                <small>Protects browser memory from freezes</small>
+              </div>
+              <input type="number" id="setting-max-mb" class="input-field" min="5" max="500" value="150" style="width:100px;" />
+            </div>
+            <div class="setting-row">
+              <div>
+                <b>Batch Concurrency Limit</b>
+                <small>Maximum parallel files processed at once</small>
+              </div>
+              <input type="number" id="setting-concurrency" class="input-field" min="1" max="6" value="2" style="width:100px;" />
+            </div>
+            <button type="button" class="btn-primary" id="save-settings-btn" style="margin-top:14px;">Save Preferences</button>
+          </div>
+
+          <div class="panel-card">
+            <h3>☁️ Optional Backend Worker & Cloud Storage</h3>
+            <p class="muted-note">AhmedPdf executes client-side operations natively. For headless LibreOffice conversions or cloud sync, configure your endpoint below (no secret keys are ever hardcoded).</p>
+            <div class="form-group">
+              <label class="field-label">Optional Conversion Worker Endpoint URL</label>
+              <input type="url" id="setting-worker-url" class="input-field" placeholder="https://api.yourdomain.com/v1/convert" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Supabase / Firebase Public Project URL (Optional)</label>
+              <input type="url" id="setting-cloud-url" class="input-field" placeholder="https://your-project.supabase.co" />
+            </div>
+            <div class="setting-actions-row">
+              <button type="button" class="btn-secondary" id="save-cloud-config-btn">Save Endpoint</button>
+              <button type="button" class="btn-danger" id="wipe-local-storage-btn">🗑️ Purge Local IndexedDB</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 12: HELP, QA & FAQ ==================== -->
+      <main class="view-container" id="view-help">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">VERIFICATION & SUPPORT</span>
+            <h1>Automated QA Self-Test, Supported Formats & FAQ</h1>
+            <p>Verify every engine live in your browser and inspect supported input/output combinations.</p>
+          </div>
+          <div class="view-header-actions">
+            <button type="button" class="btn-primary" id="run-qa-suite-btn">▶ Run Automated QA Test Suite</button>
+          </div>
+        </div>
+
+        <div class="panel-card" id="qa-results-panel" style="margin-bottom:22px;">
+          <h3>🧪 Live Engine Verification Report</h3>
+          <p class="muted-note">Click "Run Automated QA Test Suite" above to test PDF creation, magic-byte signature validation, ZIP traversal guards, Canvas image encoding, and IndexedDB persistence.</p>
+          <div id="qa-test-output" class="qa-output-grid"></div>
+        </div>
+
+        <div class="dashboard-two-col">
+          <div class="panel-card">
+            <h3>✅ Supported Formats & Real Capabilities</h3>
+            <ul class="clean-list">
+              <li><b>PDF Manipulation (Local):</b> Merge, Split, Reorder, Rotate, Delete/Duplicate Pages, Add Watermark, Page Numbers, Headers/Footers, Signature Image, Metadata Edit.</li>
+              <li><b>PDF Conversion (Local):</b> PDF → JPG/PNG (per page or ZIP), PDF → TXT, PDF → DOCX (text structure), Images → PDF, TXT → PDF, HTML → PDF.</li>
+              <li><b>Word & Excel (Local):</b> DOCX → HTML/TXT/PDF (via Mammoth), TXT → DOCX, XLSX/XLS ⇄ CSV/JSON/HTML/PDF (via SheetJS).</li>
+              <li><b>OCR Vision (Local):</b> Scanned Images/PDFs → Editable Text via Tesseract.js (English & Arabic).</li>
+              <li><b>Archives (Local):</b> Create ZIP from files/folders, Inspect & Extract ZIP with Zip-Slip & ratio protection.</li>
+            </ul>
+          </div>
+          <div class="panel-card">
+            <h3>⚠️ Known Technical Limitations (Transparency)</h3>
+            <ul class="clean-list">
+              <li><b>PDF to DOCX Layout:</b> Extracts real text paragraphs into a valid Word file, but complex multi-column graphic layouts may not match 1:1 without a server desktop publisher.</li>
+              <li><b>Legacy Binary Office (.doc / .ppt):</b> Modern `.docx` and `.xlsx` work locally; legacy 97-2003 binary files require a headless LibreOffice backend worker.</li>
+              <li><b>PDF Compression:</b> Re-samples page streams. Already-optimized text-only PDFs may not shrink further; AhmedPdf alerts you if the output is larger.</li>
+              <li><b>Encrypted PDFs:</b> Password-protected PDFs require the owner/user password before pages can be extracted or modified.</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 13: PRIVACY & SECURITY ==================== -->
+      <main class="view-container" id="view-privacy">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">ZERO-TRUST SECURITY ARCHITECTURE</span>
+            <h1>Privacy Policy & Security Guarantees</h1>
+            <p>How AhmedPdf protects your documents against unauthorized access and malicious payloads.</p>
+          </div>
+        </div>
+        <div class="panel-card prose-card">
+          <h3>1. Local-First Processing Guarantee</h3>
+          <p>By default, all PDF merging, splitting, organizing, image conversion, DOCX/XLSX parsing, and ZIP archiving happen <strong>100% locally inside your browser's memory and IndexedDB</strong>. Your documents never leave your device unless you explicitly configure and trigger an external cloud/worker endpoint.</p>
+          <h3>2. Magic-Byte File Signature Verification</h3>
+          <p>AhmedPdf never trusts file extensions alone. Every uploaded file is inspected at the binary header level (e.g., <code>%PDF-</code>, <code>PK\x03\x04</code>, <code>\xFF\xD8\xFF</code>, <code>\x89PNG</code>) to reject disguised executables or corrupted payloads.</p>
+          <h3>3. Archive Extraction Protection (Zip-Slip & Zip-Bomb Guards)</h3>
+          <p>When inspecting or extracting ZIP archives, AhmedPdf sanitizes all entry paths to block directory traversal (<code>../</code>), enforces a strict maximum entry count, monitors uncompressed size ceilings, and never executes extracted files.</p>
+        </div>
+      </main>
+
+      <!-- ==================== VIEW 14: TERMS & PLANS ==================== -->
+      <main class="view-container" id="view-terms">
+        <div class="view-header">
+          <div>
+            <span class="section-kicker">TRANSPARENT LICENSING</span>
+            <h1>Terms of Service & Platform Tiers</h1>
+            <p>Full core functionality is free and unlocked. No fake paywalls or simulated subscriptions.</p>
+          </div>
+        </div>
+        <div class="dashboard-two-col">
+          <div class="panel-card">
+            <span class="status-tag">ACTIVE PLAN</span>
+            <h3>Free Core Workstation (Unlocked)</h3>
+            <ul class="clean-list">
+              <li>✓ All 28 local PDF, Office, Image, OCR & ZIP tools unlocked</li>
+              <li>✓ Up to 150 MB per file (configurable in Settings)</li>
+              <li>✓ Local IndexedDB Workspace & Folder Organization</li>
+              <li>✓ Offline Desktop PWA Support (via <code>ah.png</code> installer)</li>
+            </ul>
+          </div>
+          <div class="panel-card">
+            <span class="section-kicker">ENTERPRISE ROADMAP</span>
+            <h3>Optional Cloud / Server Tier (Architecture Ready)</h3>
+            <ul class="clean-list">
+              <li>◦ Headless LibreOffice Worker for legacy <code>.ppt</code> / <code>.doc</code> rendering</li>
+              <li>◦ Authenticated Supabase / Firebase multi-device cloud storage</li>
+              <li>◦ High-volume server batch queues for 1 GB+ archives</li>
+            </ul>
+          </div>
+        </div>
       </main>
     </div>
   </div>
 
-  <!-- ==================== نافذة أداة المعالجة الموحدة (ACTIVE TOOL WORKBENCH MODAL) ==================== -->
-  <div class="modal-overlay" id="tool-modal-overlay" hidden>
-    <div class="modal-window tool-workbench-modal" role="dialog" aria-modal="true" aria-labelledby="active-tool-title">
+  <!-- ==================== UNIVERSAL ACTIVE TOOL WORKBENCH MODAL ==================== -->
+  <div class="modal-backdrop" id="tool-workbench-modal" hidden>
+    <div class="modal-dialog workbench-dialog" role="dialog" aria-modal="true" aria-labelledby="wb-tool-title">
       <div class="modal-header">
-        <div class="modal-title-group">
-          <span class="tool-modal-icon" id="active-tool-icon">📄</span>
+        <div class="wb-title-wrap">
+          <span class="wb-icon" id="wb-tool-icon">📄</span>
           <div>
-            <h2 id="active-tool-title">Tool Name</h2>
-            <small id="active-tool-subtitle">Local Binary Processing · Magic-Byte Verified</small>
+            <h2 id="wb-tool-title">Tool Title</h2>
+            <small id="wb-tool-desc">Tool description and privacy badge</small>
           </div>
         </div>
-        <button class="icon-btn" id="close-tool-modal-btn" aria-label="Close tool">✕</button>
+        <div class="wb-header-actions">
+          <span class="security-pill">🔒 Local Execution</span>
+          <button type="button" class="icon-btn" id="wb-close-btn" aria-label="Close tool">✕</button>
+        </div>
       </div>
 
-      <div class="modal-body">
-        <!-- منطقة رفع الملفات داخل الأداة -->
-        <div class="upload-zone" id="tool-modal-dropzone">
-          <input type="file" id="tool-modal-file-input" hidden />
-          <div class="upload-icon" id="tool-drop-icon">📂</div>
-          <h3 id="tool-drop-heading">Drop files here or click to select</h3>
-          <p id="tool-drop-AcceptNote">Accepted formats: .pdf</p>
-          <button class="btn btn-primary" type="button" id="tool-select-files-btn">Select Files</button>
-        </div>
+      <div class="modal-body" id="wb-modal-body">
+        <!-- Dynamically populated with tool-specific controls, file selector, live preview, and progress bar -->
+      </div>
 
-        <!-- قائمة الملفات المختارة مع إمكانية الترتيب والحذف -->
-        <div id="tool-selected-files-wrap" hidden>
-          <div class="selected-files-header">
-            <b id="tool-files-count-label">Selected Files (0)</b>
-            <div>
-              <button class="btn btn-outline btn-sm" id="tool-add-more-btn" type="button">+ Add More</button>
-              <button class="btn btn-outline btn-sm" id="tool-clear-files-btn" type="button">Clear</button>
-            </div>
-          </div>
-          <div class="uploaded-file-list" id="tool-uploaded-list"></div>
-        </div>
-
-        <!-- إعدادات الأداة الديناميكية -->
-        <div class="tool-options-panel" id="tool-options-panel" hidden></div>
-
-        <!-- تنبيه القيود التقنية الشفاف -->
-        <div class="limitation-notice" id="tool-limitation-banner"></div>
-
-        <!-- شريط التقدم الحقيقي -->
-        <div class="processing-progress-box" id="tool-progress-box" hidden>
-          <div class="progress-status-row">
-            <span id="tool-progress-status">Processing...</span>
-            <b id="tool-progress-percent">0%</b>
+      <div class="modal-footer" id="wb-modal-footer">
+        <div class="wb-progress-wrap" id="wb-progress-wrap" hidden>
+          <div class="wb-progress-labels">
+            <span id="wb-progress-status">Processing...</span>
+            <b id="wb-progress-pct">0%</b>
           </div>
           <div class="progress-bar-track">
-            <div class="progress-bar-fill" id="tool-progress-bar" style="width: 0%;"></div>
+            <span id="wb-progress-bar" style="width:0%"></span>
           </div>
         </div>
-
-        <!-- منطقة النتائج والتحميل -->
-        <div class="results-box" id="tool-results-box" hidden></div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-secondary" id="tool-cancel-btn" type="button">Close</button>
-        <button class="btn btn-primary" id="tool-execute-btn" type="button" disabled>⚡ Execute Operation</button>
+        <div class="wb-footer-btns">
+          <button type="button" class="btn-secondary" id="wb-cancel-btn">Close</button>
+          <button type="button" class="btn-primary" id="wb-execute-btn">⚡ Run Tool</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ==================== نافذة معاينة الملفات وفحص الأمان (PREVIEW & QA MODAL) ==================== -->
-  <div class="modal-overlay" id="generic-modal-overlay" hidden>
-    <div class="modal-window" role="dialog" aria-modal="true">
+  <!-- ==================== FILE PREVIEW & INSPECTOR MODAL ==================== -->
+  <div class="modal-backdrop" id="file-preview-modal" hidden>
+    <div class="modal-dialog preview-dialog" role="dialog" aria-modal="true">
       <div class="modal-header">
-        <h2 id="generic-modal-title">Preview</h2>
-        <button class="icon-btn" id="close-generic-modal-btn" aria-label="Close modal">✕</button>
+        <div>
+          <h3 id="preview-modal-title">File Preview</h3>
+          <small id="preview-modal-meta">Size · Type · Signature</small>
+        </div>
+        <div class="wb-header-actions">
+          <button type="button" class="btn-secondary btn-sm" id="preview-download-btn">⬇ Download</button>
+          <button type="button" class="icon-btn" id="preview-close-btn">✕</button>
+        </div>
       </div>
-      <div class="modal-body" id="generic-modal-body"></div>
-      <div class="modal-footer" id="generic-modal-footer">
-        <button class="btn btn-secondary" id="generic-modal-close-action" type="button">Close</button>
-      </div>
+      <div class="modal-body" id="preview-modal-body"></div>
     </div>
   </div>
 
-  <!-- إشعارات النظام (TOAST CONTAINER) -->
-  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <!-- ملف الجافاسكريبت الرئيسي -->
+  <!-- Main Application Script -->
   <script src="script.js"></script>
 </body>
 </html>
