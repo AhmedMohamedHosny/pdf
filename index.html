@@ -30,6 +30,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 </head>
 <body>
   <div class="app-layout" id="app-layout">
@@ -327,8 +328,8 @@
           </div>
         </div>
 
-        <div class="category-pills" id="tool-category-pills">
-          <button type="button" class="cat-pill active" data-cat="all">All Categories</button>
+<div class="category-pills" id="tool-category-pills">
+          <button type="button" class="cat-pill active" data-cat="all">All Categories (39)</button>
           <button type="button" class="cat-pill" data-cat="PDF">📄 PDF Tools</button>
           <button type="button" class="cat-pill" data-cat="Word">📝 Word & Text</button>
           <button type="button" class="cat-pill" data-cat="Excel">📊 Excel & CSV</button>
@@ -336,6 +337,7 @@
           <button type="button" class="cat-pill" data-cat="Compression">🗜️ Compression & ZIP</button>
           <button type="button" class="cat-pill" data-cat="Security">🔒 Security & Metadata</button>
           <button type="button" class="cat-pill" data-cat="OCR">🔍 OCR Vision</button>
+          <button type="button" class="cat-pill" data-cat="Dev">⚡ QR, Data & Diff</button>
         </div>
 
         <div class="tools-grid" id="all-tools-grid"></div>
@@ -565,8 +567,11 @@
                 <b>Color Theme</b>
                 <small>Switch between Deep Navy Dark and Clean Light mode</small>
               </div>
-              <select id="setting-theme-select" class="select-field" style="width:160px;">
+<select id="setting-theme-select" class="select-field" style="width:190px;">
                 <option value="dark">Deep Navy Dark</option>
+                <option value="vscode">VS Code Studio Dark</option>
+                <option value="emerald">Emerald Matrix Dark</option>
+                <option value="purple">Royal Cyber Purple</option>
                 <option value="light">Clean Daylight</option>
               </select>
             </div>

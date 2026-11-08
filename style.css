@@ -1245,3 +1245,131 @@ button:disabled {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* ==================== NEW THEMES & MULTI-STYLE PICKER UI ==================== */
+[data-theme="vscode"] {
+  --bg-main: #1e1e1e;
+  --bg-surface: #252526;
+  --bg-surface-2: #2d2d30;
+  --bg-surface-3: #3e3e42;
+  --bg-glass: rgba(37, 37, 38, 0.9);
+  --text-main: #d4d4d4;
+  --text-muted: #858585;
+  --border-color: #333337;
+  --border-light: #45454d;
+  --primary: #007acc;
+  --primary-hover: #0098ff;
+  --primary-grad: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+}
+
+[data-theme="emerald"] {
+  --bg-main: #04130e;
+  --bg-surface: #072219;
+  --bg-surface-2: #0d3528;
+  --bg-surface-3: #144937;
+  --bg-glass: rgba(7, 34, 25, 0.88);
+  --text-main: #ecfdf5;
+  --text-muted: #6ee7b7;
+  --border-color: #0f3d2e;
+  --border-light: #10b981;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-grad: linear-gradient(135deg, #10b981 0%, #047857 100%);
+}
+
+[data-theme="purple"] {
+  --bg-main: #0f0720;
+  --bg-surface: #1a0f33;
+  --bg-surface-2: #27174a;
+  --bg-surface-3: #382169;
+  --bg-glass: rgba(26, 15, 51, 0.88);
+  --text-main: #f5f3ff;
+  --text-muted: #c4b5fd;
+  --border-color: #2e1a57;
+  --border-light: #7c3aed;
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --primary-grad: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+}
+
+/* Visual Template / Style Picker Cards inside Tool Workbench */
+.style-picker-section {
+  margin: 14px 0;
+  padding: 14px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.style-picker-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.style-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 10px;
+}
+
+.style-option-card {
+  position: relative;
+  border: 2px solid var(--border-light);
+  background: var(--bg-surface);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.style-option-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.style-option-card.active {
+  border-color: var(--primary);
+  background: rgba(14, 165, 233, 0.12);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.2);
+}
+
+.style-option-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.style-option-card b {
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.style-option-card small {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Diff Comparator Boxes */
+.diff-line-add {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  padding: 2px 8px;
+  border-left: 3px solid #10b981;
+}
+.diff-line-del {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  padding: 2px 8px;
+  border-left: 3px solid #ef4444;
+  text-decoration: line-through;
+}
